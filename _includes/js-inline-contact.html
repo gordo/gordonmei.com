@@ -1,0 +1,97 @@
+    <!--Global variables. Gross.-->
+    <script type="text/javascript">
+        //(function() {
+            var li = document.createElement("li");
+            var collegeruled = document.getElementById("collegeruled");
+            var liner = document.getElementById("liner");
+            var themessage = document.getElementById("themessage");
+
+            function grow() {
+                if (this.scrollHeight > this.clientHeight) {
+                    this.style.height = parseInt(this.style.height) + 25 + "px";
+                    growPage();
+                }
+            }
+            function growTextArea() {
+                if (!document.getElementById)
+                    return;
+                themessage.onkeypress = grow;
+
+            }
+            function growPage() {
+                if (parseInt(themessage.style.height) >= 450) {
+
+                    li = document.createElement("li");
+                    collegeruled.appendChild(li);
+
+                    liner.style.height = parseInt(liner.style.height) + 25 + "px";
+                    collegeruled.style.height = parseInt(collegeruled.style.height) + 25 + "px";
+                }
+            }
+
+            function suffixed(num) {
+                if (trycount === 1) {
+                    suffix = "st";
+                }
+                else if (trycount === 2) {
+                    suffix = "nd";
+                }
+                else if (trycount === 2) {
+                    suffix = "rd";
+                }
+                else {
+                    suffix = "th";
+                }
+
+                return suffix;
+            }
+
+            var trycount = 0;
+            var suffix;
+            var proceed = true;
+            var thename = document.getElementById("thename");
+            var theemail = document.getElementById("theemail");
+
+            function validator() {
+                var validationwarning = document.getElementById("validationwarning");
+
+                if (thename.value === "" || theemail.value === "" || themessage.value === "") {
+                    validationwarning.className = "crouchingtigress";
+                    //location.href = "#headermargin";
+
+                    if(trycount > 0) {
+                        validationwarning.innerHTML = "Teacher assessment: " + trycount + suffixed(trycount) + " time's a charm. Try again.";
+                    }
+
+                    if (theemail.value != "" && !theemail.value.match(/([\w\-]+\@[\w\-]+\.[\w\-]+)/)) {
+                        validationwarning.innerHTML += " And that's not an email address.";
+                    }
+
+                    proceed = false;
+                }
+                else {
+                    proceed = true;
+                }
+
+                trycount++;
+
+                return proceed;
+            }
+
+        //})();
+    </script>
+
+    <script>
+    // Global all the things. :(
+    window.onload = function() {
+        growTextArea();
+    };
+    </script>
+
+    <script src="/js/jquery.typer.js"></script>
+    <script>
+        $(function () {
+            //$('[data-typer-targets]').typer();
+            $('[data-typer-targets]').typeTo('Reach out. Say hi.');
+        });
+    </script>

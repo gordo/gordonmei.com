@@ -1,0 +1,1283 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+// Our variables
+$base-font-family: "museo-1","museo-2", 'Museo Slab', 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', 'Helvetica', sans-serif;
+$base-font-size:   16px;
+$base-font-weight: 400;
+$small-font-size:  $base-font-size * 0.875;
+$base-line-height: 1.5;
+
+$spacing-unit:     30px;
+
+$text-color:       #111;
+$background-color: #fdfdfd;
+$brand-color:      #2a7ae2;
+
+$grey-color:       #828282;
+$grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);
+
+// Width of the content area
+$content-width:    800px;
+
+$on-palm:          600px;
+$on-laptop:        800px;
+
+
+// Custom variables
+$content-width-large: 66.25rem; // 1060px
+$content-width-large-inner: 47.5rem; // 760px
+$gradient-property: to bottom left, #50c0bc 0%, #54c8b4 100%;
+
+@mixin transition($transition-values-var) {
+  -webkit-transition: $transition-values-var;
+     -moz-transition: $transition-values-var;
+       -o-transition: $transition-values-var;
+      -ms-transition: $transition-values-var;
+          transition: $transition-values-var;
+}
+
+$transition-values: .5s ease;
+
+
+@mixin transition-property($transition-property-values-var1, $transition-property-values-var2) {
+  -webkit-transition-property: $transition-property-values-var1, $transition-property-values-var2;
+     -moz-transition-property: $transition-property-values-var1, $transition-property-values-var2;
+       -o-transition-property: $transition-property-values-var1, $transition-property-values-var2;
+      -ms-transition-property: $transition-property-values-var1, $transition-property-values-var2;
+          transition-property: $transition-property-values-var1, $transition-property-values-var2;
+}
+
+@mixin transition-duration($transition-duration-values-var1, $transition-duration-values-var2) {
+  -webkit-transition-duration: $transition-duration-values-var1, $transition-duration-values-var2;
+     -moz-transition-duration: $transition-duration-values-var1, $transition-duration-values-var2;
+       -o-transition-duration: $transition-duration-values-var1, $transition-duration-values-var2;
+      -ms-transition-duration: $transition-duration-values-var1, $transition-duration-values-var2;
+          transition-duration: $transition-duration-values-var1, $transition-duration-values-var2;
+}
+
+@mixin transition-timing-function($transition-timing-function-values-var1, $transition-timing-function-values-var2) {
+  -webkit-transition-timing-function: $transition-timing-function-values-var1, $transition-timing-function-values-var2;
+     -moz-transition-timing-function: $transition-timing-function-values-var1, $transition-timing-function-values-var2;
+       -o-transition-timing-function: $transition-timing-function-values-var1, $transition-timing-function-values-var2;
+      -ms-transition-timing-function: $transition-timing-function-values-var1, $transition-timing-function-values-var2;
+          transition-timing-function: $transition-timing-function-values-var1, $transition-timing-function-values-var2;
+}
+
+@mixin border-radius($border-radius-values-var) {
+  -webkit-border-radius: $border-radius-values-var;
+     -moz-border-radius: $border-radius-values-var;
+          border-radius: $border-radius-values-var;
+}
+
+@mixin box-shadow($box-shadow-values-var) {
+  -webkit-box-shadow: $box-shadow-values-var;
+     -moz-box-shadow: $box-shadow-values-var;
+          box-shadow: $box-shadow-values-var;
+}
+
+$box-shadow-property: 0 0 5px rgba(0, 0, 0, 0.13);
+
+@mixin animation($animation-values-var) {
+  -webkit-animation: $animation-values-var;
+     -moz-animation: $animation-values-var;
+       -o-animation: $animation-values-var;
+      -ms-animation: $animation-values-var;
+          animation: $animation-values-var;
+}
+
+$animation-property: bulger .2s ease-in-out;
+
+
+@mixin image-2x($image, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {
+    // on retina, use image that's scaled by 2
+    background-image: url($image);
+    background-size: $width $height;
+  }
+}
+
+
+// Minima also includes a mixin for defining media queries.
+// Use media queries like this:
+// @include media-query($on-palm) {
+//     .wrapper {
+//         padding-right: $spacing-unit / 2;
+//         padding-left: $spacing-unit / 2;
+//     }
+// }
+
+// Import partials from the `minima` theme.
+@import
+    "normalize",
+    "jcarousel.responsive";
+    //"minima";
+
+/* All Your Base */
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+::-moz-selection {
+    color: #fff;
+    text-shadow: none;
+    white-space: nowrap;
+}
+
+::selection {
+    color: #fff;
+    text-shadow: none;
+}
+
+#page-work {
+    ::-moz-selection {
+        background: #29b3b4;
+    }
+    ::selection {
+        background: #29b3b4;
+    }
+}
+
+#page-about {
+    ::-moz-selection {
+        background: #62788d;
+    }
+    ::selection {
+        background: #62788d;
+    }
+}
+
+#page-contact {
+    ::-moz-selection {
+        background: #c45750;
+    }
+    ::selection {
+        background: #c45750;
+    }
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+
+/* Primary Layout */
+html {
+    font-size: $base-font-size;
+}
+
+body {
+    font-family: $base-font-family;
+    background-color: #fff; /* #f7f7f7 */
+    text-rendering: optimizeLegibility;
+}
+
+header {
+    margin-top: 15px;
+    min-height: 88px;
+
+    > nav {
+        position: relative;
+        margin: 0 auto;
+        max-width: $content-width-large;
+        overflow: hidden;
+        text-align: center;
+
+        > ul {
+            float: right;
+            margin: 0;
+
+            > .selected > a {
+                border-color: #ddd;
+            }
+
+            > li {
+                display: inline-block;
+                padding: 1em 2em;
+                font-size: 16px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                -webkit-font-smoothing: subpixel-antialiased;
+                /* border-bottom: 1px solid #e5e5e5; */
+
+                > a {
+                    display: block;
+                    padding: 0.5em 0;
+                    border: 0;
+                    color: #888;
+                    text-decoration: none;
+                    letter-spacing: 4px;
+                    @include transition($transition-values);
+                    border-bottom: 4px solid transparent;
+                }
+
+                > a:hover,
+                > a:active {
+                    color: #ec675d;
+                    border-color: #ec675d;
+                }
+
+            }
+
+        }
+
+    }
+}
+
+#logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    > a {
+        display: block;
+        width: 300px;
+        height: 74px;
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-transform: lowercase;
+        text-decoration: none;
+        color: #5c6567;
+        letter-spacing: -1px;
+        background-image: url(/img/logo-masthead.png);
+        @include image-2x("/img/logo-masthead@2x.png", 100%, 100%);
+        background-size: 100% 100%; // for retina
+    }
+}
+
+
+#content {
+    background-color: #fcfcfc;
+}
+
+#hero {
+    position: relative;
+    z-index: 3; // aww yeah, own that stacking context.
+    padding: 4em 0 8em;
+    color: #fff;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px dotted #fff;
+    }
+
+    a:hover {
+        text-decoration: none;
+        opacity: 0.6;
+    }
+
+    h2 {
+        color: #fff;
+    }
+
+}
+
+
+#page-work {
+
+    #hero {
+        background-color: #29b3b4;
+        background-image: -webkit-gradient(linear, right top, left bottom, color-stop(0, #50C0BC), color-stop(1, #54C8B4));
+        background-image: -webkit-linear-gradient($gradient-property);
+        background-image: -moz-linear-gradient($gradient-property);
+        background-image: -o-linear-gradient($gradient-property);
+        background-image: -ms-linear-gradient($gradient-property);
+        background-image: linear-gradient($gradient-property);
+
+        .copyfitting h3:last-child {
+            text-indent: -3px; // faux kerning for the uppercase C
+        }
+
+    }
+
+}
+
+#page-about #hero {
+    background-color: #62788d;
+}
+
+#page-contact #hero {
+    background-color: #c45750;
+}
+
+.copyfitting {
+    margin: 0 auto;
+    max-width: $content-width-large-inner;
+
+    > h2 {
+        margin: 0 auto;
+        max-width: $content-width-large-inner; // can we just inherit this
+        font-size: 60px;
+        font-weight: 500;
+
+        > em:after {
+            content: " ";
+            font-size: 0.5em;
+        }
+
+    }
+
+    > h3 {
+        margin: 0;
+        font-size: 48px;
+        font-weight: 100;
+        line-height: 1.25em;
+    }
+
+}
+
+#showcase {
+    position: relative;
+    z-index: 4;
+
+    > nav {
+        position: relative;
+        margin: 0 auto;
+        max-width: $content-width-large;
+    }
+
+    article {
+        margin: 0 auto;
+        max-width: $content-width-large-inner;
+
+        > h2 {
+            margin: 1em auto 0.2em;
+            font-size: 36px;
+            font-weight: 500;
+        }
+
+        > p {
+            font-size: 20px;
+            font-weight: 100;
+            line-height: 1.5em;
+        }
+
+        > .footnotes {
+            font-size: 14px;
+            font-style: italic;
+            color: #ccc;
+        }
+
+    }
+
+}
+
+
+.showcasing {
+    margin: -60px auto 0;
+    max-width: $content-width-large;
+    background-color: #fff;
+    @include box-shadow($box-shadow-property);
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 4em 0;
+    color: #99a8ab;
+    @include transition($transition-values);
+}
+
+#showcase.expanded {
+    margin-top: -452px;
+    max-width: 100%;
+
+    > hgroup {
+
+        > h2 {
+            display: none;
+        }
+
+    }
+
+}
+
+
+/* Work History */
+#workhistory {
+    margin: 0 auto;
+    padding: 4em 0;
+    max-width: $content-width-large-inner;
+
+    > li {
+        position: relative;
+        float: left;
+        margin-left: 100px;
+        width: 184px;
+        height: 184px;
+        list-style: none;
+
+        > a {
+            display: block;
+            background-image: url(/img/showcase-logos-sprite.png);
+            @include image-2x("/img/showcase-logos-sprite@2x.png", 510px, 340px);
+            background-repeat: no-repeat;
+            width: 170px;
+            height: 170px;
+            text-indent: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            border: 7px solid #c9d1d2;
+            border-size: 7px;
+            @include border-radius(150px);
+            background-color: #fff;
+            outline: 0;
+        }
+
+    }
+
+    > li:first-child {
+        margin-left: 0;
+    }
+
+}
+
+#workhistory > .selected > a,
+#workhistory > li > a:hover,
+#workhistory > li > a:active {
+    @include animation($animation-property);
+}
+
+$scale: 1.05;
+
+@-webkit-keyframes bulger {
+    50% {-webkit-transform: scale($scale);}
+}
+
+@-moz-keyframes bulger {
+    50% {-moz-transform: scale($scale);}
+}
+
+@-o-keyframes bulger {
+    50% {-o-transform: scale($scale);}
+}
+
+@keyframes bulger {
+    50% {transform: scale($scale);}
+}
+
+#logo-animoto > a {
+    background-position: 0 0;
+}
+
+#logo-animoto.selected > a,
+#logo-animoto > a:hover {
+    border-color: #1bcdcf;
+    background-position: 0 -170px;
+}
+
+#logo-eventbrite > a {
+    background-position: -170px 0;
+}
+
+#logo-eventbrite.selected > a,
+#logo-eventbrite > a:hover {
+    border-color: #eea635;
+    background-position: -170px -170px;
+}
+
+#logo-yahoo > a {
+    background-position: -340px 0;
+}
+
+#logo-yahoo.selected > a,
+#logo-yahoo > a:hover {
+    border-color: #ab5fa5;
+    background-position: -340px -170px;
+}
+
+
+/* Work History - Speechless */
+#workhistory {
+
+    > li {
+
+        > blockquote {
+            display: none;
+            @include animation($animation-property);
+        }
+
+    }
+
+    > li:hover {
+
+        > blockquote {
+            display: block;
+        }
+
+    }
+
+}
+
+
+/* Work History - Dismiss */
+#xmarksthespot {
+    position: absolute;
+    top: -30px;
+    right: 30px;
+    display: none;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 30px;
+    height: 30px;
+    background: url(/img/icon-close.png) no-repeat center center;
+    @include transition($transition-values);
+}
+
+#xmarksthespot:hover {
+    background-image: url(/img/icon-close-down.png); /* sprite this later */
+}
+
+#showcase.expanded #xmarksthespot {
+    display: block;
+}
+
+
+/* Work History - Descriptions */
+
+#showcase.expanded {
+
+    #workhistory-description {
+        display: block;
+    }
+
+}
+
+#workhistory-description {
+    display: none;
+    margin: 0 auto;
+    max-width: $content-width-large-inner;
+
+    > article {
+        display: none;
+
+        > h2 {
+            margin-bottom: 0;
+        }
+
+        > hgroup {
+
+            > h3 {
+                display: inline-block;
+                margin: 0 0.5em 0 0;
+                font-size: 14px;
+                font-weight: 300;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                color: #555;
+                padding-right: 0.5em;
+                border-right: 1px solid #ccc;
+            }
+
+            > h4 {
+                display: inline-block;
+                margin: 0 auto;
+                font-size: 14px;
+                font-weight: 300;
+                font-style: italic;
+                color: #ccc;
+            }
+
+        }
+
+    }
+
+    > .selected {
+        display: block;
+    }
+
+}
+
+
+
+#description-animoto {
+    > h2 {
+        color: #19cdcf;
+    }
+}
+
+#description-eventbrite {
+    > h2 {
+        color: #efa635;
+    }
+}
+
+#description-yahoo {
+    > h2 {
+        color: #ab5fa5;
+    }
+}
+
+
+/* Work History - Hands on Deck */
+#deck-eventbrite {
+    margin-top: -105px;
+}
+
+
+/* About */
+#projects-clients {
+    > hgroup {
+        > h2 {
+            margin: 2em 0 1em 0;
+            border-top: 1px solid #eee;
+            padding: 1.6em 0 0 0;
+            font-size: 42px;
+            font-weight: 500;
+            color: #62788d;
+        }
+    }
+}
+
+#abouthistory {
+    margin: 0 auto;
+    padding: 0 0 4em 0;
+    width: 760px;
+}
+
+#abouthistory {
+
+    > li {
+        float: left;
+        margin: 0 0 1em 100px;
+        width: 330px;
+        list-style: none;
+
+        > a {
+            display: block;
+            background-image: url(/img/showcase-logos-sprite.png);
+            background-repeat: no-repeat;
+            width: 170px;
+            height: 170px;
+            text-indent: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            border: 7px solid #c9d1d2;
+            border-size: 7px;
+            @include border-radius(150px);
+            background-color: #fff;
+            outline: 0;
+        }
+
+        > article {
+            > hgroup {
+                > h3 {
+                    margin: 1em 0 0.2em 0;
+                    padding-top: 200px;
+                    background-color: transparent;
+                    background-position: top left;
+                    background-repeat: no-repeat;
+                }
+
+                > h4 {
+                    margin: 0 auto;
+                    font-size: 14px;
+                    font-weight: 300;
+                    font-style: italic;
+                    color: #ccc;
+                }
+
+            }
+        }
+
+    }
+
+    > li:nth-child(odd) {
+        margin-left: 0;
+    }
+
+}
+
+#about-cs160 > article > hgroup > h3 {
+    background-image: url(/img/logo-calengineering.png);
+}
+
+#about-berkeleyproject > article > hgroup > h3 {
+    background-image: url(/img/logo-bp.png);
+}
+
+#about-ocf > article > hgroup > h3 {
+    background-image: url(/img/logo-ocf.png);
+}
+
+#about-sfypf > article > hgroup > h3 {
+    background-image: url(/img/logo-sfypf.png);
+}
+
+
+/* Footer */
+#feet {
+    border-top: 1px solid #e3e3e3;
+    padding: 5em 0;
+    background-color: #f7f7f7;
+
+    > nav {
+
+        > h1 {
+            text-align: center;
+            color: #99a8ab;
+            font-weight: 300;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+    }
+
+}
+
+
+/* Footer - Social Badges */
+#socialbadges {
+    margin: 0 auto;
+    padding: 1em 0 3em;
+    width: 276px;
+
+    > li {
+        float: left;
+        margin-left: 12px;
+
+        > a {
+            display: block;
+        /*     background-image: url(../img/sprite-logos.png); */
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 52px;
+            height: 52px;
+            text-indent: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            border: 4px solid #f7f7f7;
+            @include border-radius(200px);
+            background-size: 100% 100%; // for retina
+            background-color: #c9d1d2;
+            @include transition-property(border-color, background);
+            @include transition-duration(.4s, .6s);
+            @include transition-timing-function(linear, ease-out);
+        }
+
+        > a:hover {
+            @include transition(border-color .4s ease-in);
+        }
+
+    }
+
+    > li:first-child {
+        margin-left: 0;
+    }
+
+}
+
+#social-twitter {
+    > a {
+        background-image: url(/img/icon-social-twitter.png);
+        @include image-2x("/img/icon-social-twitter@2x.png", 100%, 100%);
+    }
+
+    > a:hover {
+        border-color: #16b4ea;
+        background-color: #46c8f5;
+    }
+
+}
+
+#social-instagram {
+    > a {
+        background-image: url(/img/icon-social-instagram.png);
+        @include image-2x("/img/icon-social-instagram@2x.png", 100%, 100%);
+    }
+
+    > a:hover {
+        border-color: #165277;
+        background-color: #316e97;
+    }
+}
+
+#social-dribbble {
+    > a {
+        background-image: url(/img/icon-social-dribbble.png);
+        @include image-2x("/img/icon-social-dribbble@2x.png", 100%, 100%);
+    }
+
+    > a:hover {
+        border-color: #c5366c;
+        background-color: #ea4c89;
+    }
+}
+
+#social-github {
+    > a {
+        background-image: url(/img/icon-social-github.png);
+        @include image-2x("/img/icon-social-github@2x.png", 100%, 100%);
+    }
+
+    > a:hover {
+        border-color: #444;
+        background-color: #555;
+    }
+}
+
+#sosumi {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    color: #99a8ab;
+
+    > a {
+        border-bottom: 1px dotted #ccc;
+        text-decoration: none;
+        color: #777;
+        @include transition($transition-values);
+    }
+
+    > a:hover,
+    > a:active {
+        color: #ec675d;
+    }
+
+}
+
+
+/* Display */
+.crouchingtigress {display:inline;}
+.crouchingtiger {display:block;}
+.hiddendragon {display:none;}
+
+
+/* Contact */
+/* temporary until overhaul for all pages */
+#pagetelegram input, #pagetelegram textarea, #pagetelegram li, #pagetelegram ul {margin:0; padding:0;}
+
+#pagetelegram .containyourself {text-align:center;}
+#formula {margin-top:4em;}
+
+#collegeruled {font:normal 20px "Helvetica Neue", "Helvetica", sans-serif; font-weight:300;}
+
+#collegeruled {position:relative; margin:0 auto; height:630px; width:750px; background-color:#f7f7f7; border:1px solid #ccc; padding:5px; border-width:1px; border-style:solid; border-color:#ccc; text-align:left; box-shadow:0 1px 3px #ddd;}
+#collegeruled #liner {position:absolute; top:0; left:50px; width:2px; height:630px; padding:0; border:0; background-color:#f79;}
+#collegeruled li {list-style:none; padding-left:60px; border-style:solid; border-color:#c6e1e8; border-width:0 0 1px 0; height:25px; font-size:20px; line-height:25px;}
+#collegeruled #headermargin {height:50px;}
+#collegeruled input {display:inline; border-width:0 0 1px 0; border-style:solid; border-color:transparent; background-color:transparent; background-image:none; height:25px; font-size:20px;}
+#collegeruled input[type="text"] {width:180px;}
+#collegeruled input[type="email"] {width:240px;}
+#collegeruled:hover input, #collegeruled input:focus, #collegeruled input:active {border-bottom:1px dashed #888; background-color:transparent; outline:0;}
+#collegeruled textarea {border:0; background-color:transparent; background-image:none; width:690px; height:400px; line-height:26px; font-size:20px; display:block;}
+#collegeruled:hover textarea {background-color: rgba(255, 255, 255, 0.6); text-decoration:underline;}
+#collegeruled textarea:focus, #collegeruled textarea:active {background-color:transparent; outline:0; text-decoration:none;}
+#collegeruled label {display:none;}
+#themessage {position:absolute;}
+
+/* Safari needs -webkit-border-top-left and -webkit-border-bottom-left. Chrome is okay. */
+#pagetelegram input[type="submit"], #sender {margin:0; padding:0.3em 0.7em; border:1px solid #cfd6d9; border-radius:0 20px 20px 0; -webkit-border-radius:0 20px 20px 0; -webkit-border-top-left-radius:0; -webkit-border-bottom-left-radius:0; -moz-border-radius:0 20px 20px 0; background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#e3e7ef)) !important; background:-moz-linear-gradient(top, #fff, #fff, #e3e7ef) !important; text-shadow: #fff 0 1px 0;}
+#pagetelegram input[type="submit"]:hover, #sender:hover {cursor:pointer; background-color:#eee; background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff), color-stop(0.5, #e3e7ef)) !important; background:-moz-linear-gradient(top, #fff, #e3e7ef, #fff) !important;}
+
+/* With captcha */
+/*
+#sender {float:left; display:block; font-size:20px; padding:9px 0.9em 9px 0.7em; height:42px; line-height:19px;}
+#sendpreparation {margin:1em auto; text-align:center; width:340px; height:50px;}
+#pagetelegram #labelcaptcha {display:block; margin-bottom:0.5em;}
+#pagetelegram #captchaimage {float:left; border:1px solid #ccc;}
+#pagetelegram #captchainput {float:left; width:90px; height:40px; font-size:20px; padding:0 3px 0 5px;}
+*/
+
+/* Without captcha */
+#sendersimple {
+    position: relative;
+    display: block;
+    border: none;
+    padding: 1em 3em;
+    margin: 2em auto 0;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Helvetica', sans-serif;
+    font-weight: 400;
+    font-size: 0.9em;
+    @include box-shadow(inset 0 -1px 0 rgba(0, 0, 0, .2));
+    background-color: #c45750;
+    outline: 0;
+    @include transition($transition-values);
+}
+
+#sendersimple:hover {
+    opacity: 0.9;
+    padding: 1em 5em;
+}
+
+#sendersimple:hover span:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: ".";
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    -webkit-background-size: 50px 50px;
+    -moz-background-size: 50px 50px;
+    background-size: 50px 50px; /* Controls the size of the stripes */
+    background-color: #efe2cf;
+    background-image: -webkit-gradient(linear, 0 0, 100% 100%,
+                            color-stop(.25, transparent),
+                            color-stop(.5, transparent),
+                            color-stop(.5, rgb(98, 120, 141)),
+                            color-stop(.75, rgb(98, 120, 141)),
+                            color-stop(.75, transparent),
+                            to(transparent));
+    background-image: -webkit-linear-gradient(-45deg,
+                        transparent 25%,
+                        transparent 50%,
+                        rgb(98, 120, 141) 50%, /* blue */
+                        rgb(98, 120, 141) 75%,
+                        transparent 75%,
+                        transparent);
+    background-image: -moz-linear-gradient(-45deg,
+                        transparent 25%,
+                        transparent 50%,
+                        rgb(98, 120, 141) 50%, /* blue */
+                        rgb(98, 120, 141) 75%,
+                        transparent 75%,
+                        transparent);
+    background-image: -ms-linear-gradient(-45deg,
+                        transparent 25%,
+                        transparent 50%,
+                        rgb(98, 120, 141) 50%, /* blue */
+                        rgb(98, 120, 141) 75%,
+                        transparent 75%,
+                        transparent);
+    background-image: -o-linear-gradient(-45deg,
+                        transparent 25%,
+                        transparent 50%,
+                        rgb(98, 120, 141) 50%, /* blue */
+                        rgb(98, 120, 141) 75%,
+                        transparent 75%,
+                        transparent);
+    background-image: linear-gradient(-45deg,
+                        transparent 25%,
+                        transparent 50%,
+                        rgb(98, 120, 141) 50%, /* blue */
+                        rgb(98, 120, 141) 75%,
+                        transparent 75%,
+                        transparent);
+}
+
+#sendersimple:active {
+    @include box-shadow(inset 0 1px 0 rgba(0, 0, 0, .25));
+    padding: 0 4em;
+}
+
+#validationwarning {
+    color: #ff5c80;
+    font-weight: 500;
+}
+
+
+/* Contact - Placeholders (generalize this later) */
+::-webkit-input-placeholder {
+    color: #ddd;
+}
+
+::-moz-placeholder {
+    color: #ddd;
+}
+
+:-ms-input-placeholder {
+    color: #ddd;
+}
+
+input:-moz-placeholder {
+    color: #ddd;
+}
+
+
+/* Absolutely Speechless */
+.speechbubble {
+    position: absolute;
+    top: 150px;
+    left: -17px;
+    margin-top: 55px;
+    padding: 5px 12px;
+    min-width: 125px;
+    text-align: center;
+    background-color: #fff;
+    border-color: #c9d1d2;
+    border-style: solid;
+    border-width: 2px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    color: #99a8ab;
+    font-weight: 300;
+}
+
+.speechbubble:after {
+    content: "";
+    position: absolute;
+    top: -19px;
+    left: 40%;
+    border: 10px solid transparent;
+    border-bottom-color: #fff;
+    display: block;
+    width: 0;
+}
+
+/* Faux border around the other bubble tip */
+.speechbubble:before {
+    content: "";
+    position: absolute;
+    top: -22px;
+    left: 40%;
+    display: block;
+    width: 0;
+    border: 10px solid transparent;
+    border-bottom-color: #c9d1d2;
+}
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

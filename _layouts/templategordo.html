@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+
+    <body id="page-{{ page.pagename }}">
+
+{% include nav.html %}
+
+        <section class="page-wrapper">
+{{content}}
+        </section>
+
+{% include footer.html %}
+    </body>
+
+{% if page.pagename == 'about' %}
+{% include js-inline-about.html %}
+{% elsif page.pagename == 'contact' %}
+{% include js-inline-contact.html %}
+{% elsif page.pagename == 'work' %}
+{% include js-inline-work.html %}
+{% else %}
+{% endif %}
+
+{% include js-inline-analytics.html %}
+
+</html>

@@ -3,33 +3,21 @@
 ---
 @charset "utf-8";
 
-// Our variables
+// Variables
 $base-font-family: "museo-1","museo-2", 'Museo Slab', 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', 'Helvetica', sans-serif;
-$base-font-size:   16px;
-$base-font-weight: 400;
-$small-font-size:  $base-font-size * 0.875;
-$base-line-height: 1.5;
+$base-font-size: 16px;
 
-$spacing-unit:     30px;
+$breakpoint-med-lg: 66.25rem; // 1060px
+$breakpoint-med: 768px;
+$breakpoint-sm: 480px;
 
-$text-color:       #111;
-$background-color: #fdfdfd;
-$brand-color:      #2a7ae2;
-
-$grey-color:       #828282;
-$grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark:  darken($grey-color, 25%);
-
-// Width of the content area
-$content-width:    800px;
-
-$on-palm:          600px;
-$on-laptop:        800px;
-
-
-// Custom variables
 $content-width-large: 66.25rem; // 1060px
 $content-width-large-inner: 47.5rem; // 760px
+$content-width-medium-inner: 90%;
+$content-width-small-inner: 90%;
+
+$breakpoint-med-threshold: 800px; // threshold for switch from centered fixed width content to percent width
+
 $gradient-property: to bottom left, #50c0bc 0%, #54c8b4 100%;
 
 @mixin transition($transition-values-var) {
@@ -105,20 +93,10 @@ $animation-property: bulger .2s ease-in-out;
 }
 
 
-// Minima also includes a mixin for defining media queries.
-// Use media queries like this:
-// @include media-query($on-palm) {
-//     .wrapper {
-//         padding-right: $spacing-unit / 2;
-//         padding-left: $spacing-unit / 2;
-//     }
-// }
-
-// Import partials from the `minima` theme.
+// Import partials
 @import
     "normalize",
     "jcarousel.responsive";
-    //"minima";
 
 /* All Your Base */
 html,
@@ -129,9 +107,16 @@ textarea {
     color: #222;
 }
 
+html {
+    font-size: $base-font-size;
+}
+
 body {
-    font-size: 1em;
+    font-family: $base-font-family;
+    background-color: #fff; /* #f7f7f7 */
+    font-size: 1rem;
     line-height: 1.4;
+    text-rendering: optimizeLegibility;
 }
 
 ::-moz-selection {
@@ -163,7 +148,7 @@ body {
     }
 }
 
-#page-contact {
+#page-contact, #page-contactthanks {
     ::-moz-selection {
         background: #c45750;
     }
@@ -174,11 +159,11 @@ body {
 
 hr {
     display: block;
+    margin: 1em 0;
+    padding: 0;
     height: 1px;
     border: 0;
     border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
 }
 
 img {
@@ -204,14 +189,9 @@ textarea {
 
 
 /* Primary Layout */
-html {
-    font-size: $base-font-size;
-}
 
-body {
-    font-family: $base-font-family;
-    background-color: #fff; /* #f7f7f7 */
-    text-rendering: optimizeLegibility;
+nav > ul {
+    padding: 0;
 }
 
 header {
@@ -228,6 +208,9 @@ header {
         > ul {
             float: right;
             margin: 0;
+            @media screen and (max-width: $breakpoint-med) {
+                float: none;
+            }
 
             > .selected > a {
                 border-color: #ddd;
@@ -235,8 +218,11 @@ header {
 
             > li {
                 display: inline-block;
-                padding: 1em 2em;
-                font-size: 16px;
+                padding: 1rem 2rem;
+                @media screen and (max-width: $breakpoint-sm) {
+                    padding: 1rem 1rem;
+                }
+                font-size: 1rem;
                 text-transform: uppercase;
                 letter-spacing: 2px;
                 -webkit-font-smoothing: subpixel-antialiased;
@@ -244,7 +230,7 @@ header {
 
                 > a {
                     display: block;
-                    padding: 0.5em 0;
+                    padding: 0.5rem 0;
                     border: 0;
                     color: #888;
                     text-decoration: none;
@@ -273,6 +259,13 @@ header {
     margin: 0;
     padding: 0;
     text-align: center;
+    @media only screen and (min-width: $breakpoint-med) and (max-width: $breakpoint-med-lg) {
+        top: 0.3rem;
+        left: 2rem;
+    }
+    @media only screen and (max-width: $breakpoint-med) {
+        position: relative;
+    }
 
     > a {
         display: block;
@@ -288,8 +281,21 @@ header {
         background-image: url(/img/logo-masthead.png);
         @include image-2x("/img/logo-masthead@2x.png", 100%, 100%);
         background-size: 100% 100%; // for retina
+        @media only screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-med-lg) {
+            width: 240px;
+            height: 60px;
+        }
+        @media screen and (max-width: $breakpoint-med) {
+            margin: 0 auto;
+        }
+        @media screen and (max-width: $breakpoint-sm) {
+            width: 150px;
+            height: 37px;
+        }
     }
 }
+
+
 
 
 #content {
@@ -299,7 +305,10 @@ header {
 #hero {
     position: relative;
     z-index: 3; // aww yeah, own that stacking context.
-    padding: 4em 0 8em;
+    padding: 4rem 0 8rem;
+    @media screen and (max-width: $breakpoint-sm) {
+        padding: 2rem 0 6rem;
+    }
     color: #fff;
 
     a {
@@ -333,6 +342,12 @@ header {
 
         .copyfitting h3:last-child {
             text-indent: -3px; // faux kerning for the uppercase C
+            @media screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-med-threshold) {
+                text-indent: -2px;
+            }
+            @media screen and (max-width: $breakpoint-sm) {
+                text-indent: -1px;
+            }
         }
 
     }
@@ -343,32 +358,54 @@ header {
     background-color: #62788d;
 }
 
-#page-contact #hero {
+#page-contact #hero,
+#page-contactthanks #hero {
     background-color: #c45750;
 }
 
 .copyfitting {
     margin: 0 auto;
     max-width: $content-width-large-inner;
+    @media screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-med-threshold) {
+        max-width: $content-width-medium-inner;
+    }
+    @media screen and (max-width: $breakpoint-sm) {
+        max-width: $content-width-small-inner;
+    }
 
     > h2 {
         margin: 0 auto;
         max-width: $content-width-large-inner; // can we just inherit this
-        font-size: 60px;
+        font-size: 3.75rem;
         font-weight: 500;
+        @media screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-med-threshold) {
+            font-size: 3.125rem;
+        }
+        @media screen and (max-width: $breakpoint-sm) {
+            font-size: 2.25rem;
+            line-height: 1.8;
+        }
 
         > em:after {
             content: " ";
-            font-size: 0.5em;
+            font-size: 0.5rem;
         }
 
     }
 
     > h3 {
         margin: 0;
-        font-size: 48px;
+        font-size: 3rem;
         font-weight: 100;
-        line-height: 1.25em;
+        line-height: 1.25;
+        @media screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-med-threshold) {
+            font-size: 2rem;
+            line-height: 1.4;
+        }
+        @media screen and (max-width: $breakpoint-sm) {
+            font-size: 1.5rem;
+            line-height: 1.5;
+        }
     }
 
 }
@@ -376,6 +413,9 @@ header {
 #showcase {
     position: relative;
     z-index: 4;
+    @media screen and (max-width: $breakpoint-sm) {
+         padding: 2rem 0 3rem 0;
+    }
 
     > nav {
         position: relative;
@@ -386,17 +426,30 @@ header {
     article {
         margin: 0 auto;
         max-width: $content-width-large-inner;
+        @media screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-med-threshold) {
+            max-width: $content-width-medium-inner;
+        }
+        @media screen and (max-width: $breakpoint-sm) {
+            max-width: $content-width-small-inner;
+        }
 
         > h2 {
-            margin: 1em auto 0.2em;
-            font-size: 36px;
+            margin: 2.25rem auto 0.2rem;
+            font-size: 2.25rem; /* 36px */
             font-weight: 500;
+            @media screen and (max-width: $breakpoint-sm) {
+                font-size: 2rem;
+                line-height: 1.25;
+            }
         }
 
         > p {
-            font-size: 20px;
+            font-size: 1.25rem; /* 20px */
             font-weight: 100;
-            line-height: 1.5em;
+            line-height: 1.5;
+            @media screen and (max-width: $breakpoint-sm) {
+                font-size: 1rem;
+            }
         }
 
         > .footnotes {
@@ -407,11 +460,19 @@ header {
 
     }
 
+    article:first-child {
+        > h2 {
+           @media screen and (max-width: $breakpoint-sm) {
+                margin-top: 1rem;
+            }
+        }
+    }
+
 }
 
 
 .showcasing {
-    margin: -60px auto 0;
+    margin: -3.75rem auto 0; /* -60px */
     max-width: $content-width-large;
     background-color: #fff;
     @include box-shadow($box-shadow-property);
@@ -421,14 +482,27 @@ header {
     -moz-border-radius-topright: 3px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    padding: 4em 0;
+    padding: 4rem 0;
     color: #99a8ab;
     @include transition($transition-values);
+    @media screen and (max-width: $breakpoint-med-lg) {
+        border-radius: 0;
+    }
 }
 
 #showcase.expanded {
     margin-top: -452px;
     max-width: 100%;
+    @media screen and (min-width: 562px) and (max-width: $breakpoint-med-threshold) {
+        margin-top: -390px;
+    }
+    @media screen and (min-width: $breakpoint-sm) and (max-width: 562px) {
+        margin-top: -434px;
+    }
+    @media screen and (max-width: $breakpoint-sm) {
+        margin-top: -332px;
+        padding-top: 4rem;
+    }
 
     > hgroup {
 
@@ -444,8 +518,19 @@ header {
 /* Work History */
 #workhistory {
     margin: 0 auto;
-    padding: 4em 0;
+    padding: 4rem 0;
     max-width: $content-width-large-inner;
+    @media screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-med-threshold) {
+        max-width: $content-width-medium-inner;
+    }
+    @media screen and (max-width: $breakpoint-sm) {
+        padding: 2rem 0 0 0;
+        /* max-width: 25rem; */
+        max-width: 90%;
+    }
+    @media screen and (max-width: 400px) {
+        max-width: 95%; /* circle shape optical alignment hack to force gaps between discs in edge case */
+    }
 
     > li {
         position: relative;
@@ -454,7 +539,19 @@ header {
         width: 184px;
         height: 184px;
         list-style: none;
+        @media screen and (max-width: $breakpoint-med-threshold) {
+            width: 33%;
+            margin-left: 0;
+        }
+        @media screen and (max-width: $breakpoint-sm) {
+            /*
+            width: 120px;
+            height: 120px;
+            margin-left: 10px;
+            */
+        }
 
+        /* sprites across breakpoints are a nightmare */
         > a {
             display: block;
             background-image: url(/img/showcase-logos-sprite.png);
@@ -462,6 +559,18 @@ header {
             background-repeat: no-repeat;
             width: 170px;
             height: 170px;
+            @media screen and (max-width: 670px) {
+                background-image: url(/img/showcase-logos-sprite-medium.png);
+                width: 120px;
+                height: 120px;
+                @include image-2x("/img/showcase-logos-sprite-medium@2x.png", 360px, 240px); /* scaled down proportionally re: width/height breakpoint ratio */
+            }
+            @media screen and (max-width: $breakpoint-sm) {
+                background-image: url(/img/showcase-logos-sprite-small.png);
+                width: 106px;
+                height: 106px;
+                @include image-2x("/img/showcase-logos-sprite-small@2x.png", 318px, 212px); /* scaled down proportionally re: width/height breakpoint ratio */
+            }
             text-indent: 100%;
             white-space: nowrap;
             overflow: hidden;
@@ -476,6 +585,9 @@ header {
 
     > li:first-child {
         margin-left: 0;
+        @media screen and (max-width: $breakpoint-sm) {
+            /* margin-left: 10px; */
+        }
     }
 
 }
@@ -511,27 +623,42 @@ $scale: 1.05;
 #logo-animoto.selected > a,
 #logo-animoto > a:hover {
     border-color: #1bcdcf;
-    background-position: 0 -170px;
+    background-position: 0 -170px; /* 25% = 170px in this case */
+    @media screen and (max-width: $breakpoint-med-threshold) {
+        background-position: 0 100%;
+   }
 }
 
 #logo-eventbrite > a {
     background-position: -170px 0;
+    @media screen and (max-width: $breakpoint-med-threshold) {
+        background-position: 50% 0;
+   }
 }
 
 #logo-eventbrite.selected > a,
 #logo-eventbrite > a:hover {
     border-color: #eea635;
     background-position: -170px -170px;
+    @media screen and (max-width: $breakpoint-med-threshold) {
+        background-position: 50% 100%;
+   }
 }
 
 #logo-yahoo > a {
-    background-position: -340px 0;
+    background-position: -340px 0; /* 50% = 340px in this case */
+    @media screen and (max-width: $breakpoint-med-threshold) {
+        background-position: 100% 0;
+   }
 }
 
 #logo-yahoo.selected > a,
 #logo-yahoo > a:hover {
     border-color: #ab5fa5;
     background-position: -340px -170px;
+    @media screen and (max-width: $breakpoint-med-threshold) {
+        background-position: 100% 100%;
+   }
 }
 
 
@@ -569,12 +696,20 @@ $scale: 1.05;
     overflow: hidden;
     width: 30px;
     height: 30px;
-    background: url(/img/icon-close.png) no-repeat center center;
+    background-image: url(/img/icon-close.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    @include image-2x("/img/icon-close@2x.png", 100%, 100%);
     @include transition($transition-values);
+    @media screen and (max-width: $breakpoint-med-threshold) {
+        top: -45px;
+        right: 15px;
+    }
 }
 
 #xmarksthespot:hover {
     background-image: url(/img/icon-close-down.png); /* sprite this later */
+    @include image-2x("/img/icon-close-down@2x.png", 100%, 100%);
 }
 
 #showcase.expanded #xmarksthespot {
@@ -596,9 +731,18 @@ $scale: 1.05;
     display: none;
     margin: 0 auto;
     max-width: $content-width-large-inner;
+    @media screen and (max-width: $breakpoint-med) {
+        max-width: $content-width-medium-inner;
+    }
+    @media screen and (max-width: $breakpoint-sm) {
+        max-width: $content-width-small-inner;
+    }
 
     > article {
         display: none;
+        @media screen and (max-width: $breakpoint-med) {
+            max-width: 100%;
+        }
 
         > h2 {
             margin-bottom: 0;
@@ -668,29 +812,38 @@ $scale: 1.05;
 #projects-clients {
     > hgroup {
         > h2 {
-            margin: 2em 0 1em 0;
+            margin: 2rem 0 1rem 0;
             border-top: 1px solid #eee;
-            padding: 1.6em 0 0 0;
-            font-size: 42px;
+            padding: 1.6rem 0 0 0;
+            font-size: 2.625rem; /* 42px */
             font-weight: 500;
             color: #62788d;
+            @media screen and (max-width: $breakpoint-sm) {
+                font-size: 2rem;
+            }
         }
     }
 }
 
 #abouthistory {
     margin: 0 auto;
-    padding: 0 0 4em 0;
-    width: 760px;
-}
-
-#abouthistory {
+    padding: 0 0 4rem 0;
+    max-width: $content-width-large-inner;
+    @media screen and (max-width: $breakpoint-sm) {
+        max-width: 100%;
+    }
 
     > li {
         float: left;
-        margin: 0 0 1em 100px;
+        margin: 0 0 1rem 100px;
         width: 330px;
         list-style: none;
+        @media screen and (max-width: $breakpoint-med-threshold) {
+            float: none;
+            margin-left: 0;
+            width: 100%;
+            border-top: 1px solid #eee;
+        }
 
         > a {
             display: block;
@@ -709,6 +862,9 @@ $scale: 1.05;
         }
 
         > article {
+            @media screen and (max-width: $breakpoint-med-threshold) {
+                max-width: 100%;
+            }
             > hgroup {
                 > h3 {
                     margin: 1em 0 0.2em 0;
@@ -735,6 +891,15 @@ $scale: 1.05;
         margin-left: 0;
     }
 
+    > li:first-child {
+        @media screen and (max-width: $breakpoint-med) {
+            border-top: 0;
+        }
+        @media screen and (max-width: $breakpoint-sm) {
+            border-top: 0;
+        }
+    }
+
 }
 
 #about-cs160 > article > hgroup > h3 {
@@ -757,8 +922,11 @@ $scale: 1.05;
 /* Footer */
 #feet {
     border-top: 1px solid #e3e3e3;
-    padding: 5em 0;
+    padding: 5rem 0;
     background-color: #f7f7f7;
+    @media screen and (max-width: $breakpoint-sm) {
+        padding: 2rem 0 6rem 0;
+    }
 
     > nav {
 
@@ -766,9 +934,12 @@ $scale: 1.05;
             text-align: center;
             color: #99a8ab;
             font-weight: 300;
-            font-size: 18px;
+            font-size: 1.125rem; /* 18px */
             text-transform: uppercase;
             letter-spacing: 2px;
+            @media screen and (max-width: $breakpoint-sm) {
+                font-size: 1rem;
+            }
         }
 
     }
@@ -779,8 +950,11 @@ $scale: 1.05;
 /* Footer - Social Badges */
 #socialbadges {
     margin: 0 auto;
-    padding: 1em 0 3em;
+    padding: 1rem 0 3rem;
     width: 276px;
+    @media screen and (max-width: $breakpoint-sm) {
+        padding: 0.5rem 0 1rem;
+    }
 
     > li {
         float: left;
@@ -868,9 +1042,12 @@ $scale: 1.05;
 
 #sosumi {
     text-align: center;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 300;
     color: #99a8ab;
+    @media screen and (max-width: $breakpoint-sm) {
+        font-size: 0.85rem;
+    }
 
     > a {
         border-bottom: 1px dotted #ccc;
@@ -898,17 +1075,91 @@ $scale: 1.05;
 #pagetelegram input, #pagetelegram textarea, #pagetelegram li, #pagetelegram ul {margin:0; padding:0;}
 
 #pagetelegram .containyourself {text-align:center;}
-#formula {margin-top:4em;}
 
-#collegeruled {font:normal 20px "Helvetica Neue", "Helvetica", sans-serif; font-weight:300;}
+#formula {
+    margin-top: 4rem;
+    @media screen and (max-width: $breakpoint-sm) {
+        margin-top: 2rem;
+    }
+}
 
-#collegeruled {position:relative; margin:0 auto; height:630px; width:750px; background-color:#f7f7f7; border:1px solid #ccc; padding:5px; border-width:1px; border-style:solid; border-color:#ccc; text-align:left; box-shadow:0 1px 3px #ddd;}
-#collegeruled #liner {position:absolute; top:0; left:50px; width:2px; height:630px; padding:0; border:0; background-color:#f79;}
-#collegeruled li {list-style:none; padding-left:60px; border-style:solid; border-color:#c6e1e8; border-width:0 0 1px 0; height:25px; font-size:20px; line-height:25px;}
+#collegeruled {
+    position: relative;
+    margin: 0 auto;
+    padding: 5px;
+    max-width: 750px; /* 760px with 5px padding, because notepaper effect */
+    height: 630px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc;
+    text-align: left;
+    font: normal 20px "Helvetica Neue", "Helvetica", sans-serif;
+    font-weight: 300;
+    box-shadow: 0 1px 3px #ddd;
+    @media screen and (max-width: $breakpoint-med) {
+        max-width: $content-width-medium-inner;
+    }
+    @media screen and (max-width: $breakpoint-sm) {
+        max-width: $content-width-small-inner;
+    }
+}
+
+#collegeruled .lines-for-padding-at-medium-widths {
+    display: none;
+    @media screen and (max-width: $breakpoint-med) {
+        display: block;
+    }
+}
+
+#collegeruled .lines-to-remove-at-medium-widths {
+    display: block;
+    @media screen and (max-width: $breakpoint-med) {
+        display: none;
+    }
+}
+
+#collegeruled .lines-for-padding-at-small-widths {
+    display: none;
+    @media screen and (max-width: $breakpoint-sm) {
+        display: block;
+    }
+}
+
+#collegeruled .lines-to-remove-at-small-widths {
+    display: block;
+    @media screen and (max-width: $breakpoint-sm) {
+        display: none;
+    }
+}
+
+#collegeruled #liner {
+    position: absolute;
+    top: 0;
+    left: 50px;
+    padding: 0;
+    width: 2px;
+    height: 630px;
+    border: 0;
+    background-color: #f79;
+}
+
+#collegeruled li {
+    list-style: none;
+    padding-left: 60px;
+    border-style: solid;
+    border-color: #c6e1e8;
+    border-width: 0 0 1px 0;
+    height: 25px;
+    font-size: 20px;
+    line-height: 25px;
+}
+
 #collegeruled #headermargin {height:50px;}
 #collegeruled input {display:inline; border-width:0 0 1px 0; border-style:solid; border-color:transparent; background-color:transparent; background-image:none; height:25px; font-size:20px;}
-#collegeruled input[type="text"] {width:180px;}
-#collegeruled input[type="email"] {width:240px;}
+#collegeruled input[type="text"] {width: 180px;}
+#collegeruled input[type="email"] {width: 240px;}
 #collegeruled:hover input, #collegeruled input:focus, #collegeruled input:active {border-bottom:1px dashed #888; background-color:transparent; outline:0;}
 #collegeruled textarea {border:0; background-color:transparent; background-image:none; width:690px; height:400px; line-height:26px; font-size:20px; display:block;}
 #collegeruled:hover textarea {background-color: rgba(255, 255, 255, 0.6); text-decoration:underline;}
@@ -1066,6 +1317,12 @@ input:-moz-placeholder {
     border-radius: 5px;
     color: #99a8ab;
     font-weight: 300;
+    @media screen and (max-width: $breakpoint-sm) {
+        top: 90px;
+        left: -41px;
+        margin-top: 55px;
+        min-width: 100px;
+   }
 }
 
 .speechbubble:after {

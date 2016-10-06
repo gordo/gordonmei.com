@@ -8,7 +8,7 @@ $yourname = check_input($_POST['thename'], "Enter your name");
 $email    = check_input($_POST['theemail']);
 $comments = check_input($_POST['themessage'], "Write your message");
 
-/* If e-mail is not valid show error message */
+/* If e-mail is not valid, show error message */
 if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email))
 {
     show_error("E-mail address not valid");
@@ -27,7 +27,7 @@ $comments
 mail($myemail, $mysubject, $message);
 
 /* Redirect visitor to the thank you page */
-header('Location: indexconfirm.html');
+header('Location: thanks.html');
 exit();
 
 /* Functions we used */

@@ -664,6 +664,7 @@ $scalemega: 1.02;
 #work-history-logos li {
     float: left;
     margin: 0 auto 0 60px;
+    width: 155px;
     @media screen and (min-width: 400px) and (max-width: 944px) {
         float: none;
         margin-left: 0;
@@ -675,8 +676,11 @@ $scalemega: 1.02;
     margin-left: 0;
     padding-right: 50px; /* instead of 60 to account for baked in 10px padding in image */
     border-right: 1px solid #eee;
+    width: 402px;
     @media screen and (min-width: 400px) and (max-width: 944px) {
         margin-bottom: 6rem;
+        border-right: 0;
+        width: 100%;
     }
 }
 

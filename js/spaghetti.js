@@ -1,4 +1,4 @@
-$('#workhistory').delegate('li', 'click', function(event) {
+$('#gallery').delegate('li', 'click', function(event) {
     var showcaseEl = $('#showcase');
 
     event.preventDefault();
@@ -11,8 +11,8 @@ $('#workhistory').delegate('li', 'click', function(event) {
     }
 
     // select, et cetera
-    $('#workhistory > li').removeClass('selected');
-    $(this).toggleClass('selected');
+    // $('#workhistory > li').removeClass('selected');
+    // $(this).toggleClass('selected');
 
     // toggle description - relies too much on particular structure in the DOM, refactor this later.
     $('#workhistory-description > article').removeClass('selected');

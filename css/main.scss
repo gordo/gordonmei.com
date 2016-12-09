@@ -4,7 +4,7 @@
 @charset "utf-8";
 
 // Variables
-$base-font-family: "museo-1","museo-2", 'Museo Slab', 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', 'Helvetica', sans-serif;
+$base-font-family: "museo-slab", 'Museo Slab', BlinkMacSystemFont, 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', 'Helvetica', sans-serif;
 $base-font-size: 16px;
 
 $breakpoint-med-lg: 66.25rem; // 1060px
@@ -269,7 +269,7 @@ header {
 
     > a {
         display: block;
-        width: 300px;
+        width: 264px;
         height: 74px;
         text-indent: 100%;
         white-space: nowrap;
@@ -282,20 +282,18 @@ header {
         @include image-2x("/img/logo-masthead@2x.png", 100%, 100%);
         background-size: 100% 100%; // for retina
         @media only screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-med-lg) {
-            width: 240px;
+            width: 210px;
             height: 60px;
         }
         @media screen and (max-width: $breakpoint-med) {
             margin: 0 auto;
         }
         @media screen and (max-width: $breakpoint-sm) {
-            width: 150px;
+            width: 132px;
             height: 37px;
         }
     }
 }
-
-
 
 
 #content {
@@ -665,7 +663,7 @@ $scalemega: 1.02;
     float: left;
     margin: 0 auto 0 60px;
     width: 155px;
-    @media screen and (min-width: 400px) and (max-width: 944px) {
+    @media screen and (max-width: 944px) {
         float: none;
         margin-left: 0;
         width: 100%;
@@ -677,7 +675,7 @@ $scalemega: 1.02;
     padding-right: 50px; /* instead of 60 to account for baked in 10px padding in image */
     border-right: 1px solid #eee;
     width: 402px;
-    @media screen and (min-width: 400px) and (max-width: 944px) {
+    @media screen and (max-width: 944px) {
         margin-bottom: 6rem;
         border-right: 0;
         width: 100%;

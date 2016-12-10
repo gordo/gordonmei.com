@@ -25,3 +25,7 @@ $('#xmarksthespot').on('click', function(event) {
     $('#showcase').removeClass('expanded');
     $('#workhistory > li').removeClass('selected');
 });
+
+$('#projects-clients .team-logo').on('click', function(event) {
+    event.preventDefault();
+});

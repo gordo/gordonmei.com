@@ -408,7 +408,7 @@ header {
 
 }
 
-#showcase {
+.showcase-container {
     position: relative;
     z-index: 4;
     @media screen and (max-width: $breakpoint-sm) {
@@ -495,7 +495,7 @@ header {
 }
 
 
-.showcasing {
+.showcase-container {
     margin: -3.75rem auto 0; /* -60px */
     max-width: $content-width-large;
     background-color: #fff;
@@ -514,6 +514,7 @@ header {
     }
 }
 
+.showcase-container.expanded,
 #showcase.expanded {
     margin-top: -452px;
     max-width: 100%;
@@ -710,61 +711,51 @@ $scalemega: 1.02;
 
 
 /* Work History */
-#workhistory {
+.about-history-container {
     margin: 0 auto;
-    padding: 4rem 0;
+    padding: 1rem 0;
     max-width: $content-width-large-inner;
     @media screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-med-threshold) {
-        max-width: $content-width-medium-inner;
+        margin: 0;
+        max-width: 388px;
     }
     @media screen and (max-width: $breakpoint-sm) {
         padding: 2rem 0 0 0;
         /* max-width: 25rem; */
         max-width: 90%;
     }
-    @media screen and (max-width: 400px) {
-        max-width: 95%; /* circle shape optical alignment hack to force gaps between discs in edge case */
+    @media screen and (max-width: 438px) {
+        max-width: 172px; /* circle shape optical alignment hack to force gaps between discs in edge case */
     }
 
     > li {
         position: relative;
         float: left;
-        margin-left: 100px;
-        width: 184px;
-        height: 184px;
+        margin-left: 24px;
+        width: 172px;
         list-style: none;
-        @media screen and (max-width: $breakpoint-med-threshold) {
-            width: 33%;
-            margin-left: 0;
+        @media screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-med-threshold) {
+            margin-bottom: 3rem;
+            margin-left: 44px;
         }
         @media screen and (max-width: $breakpoint-sm) {
-            /*
-            width: 120px;
-            height: 120px;
+            margin-bottom: 3rem;
             margin-left: 10px;
-            */
+        }
+        @media screen and (max-width: 438px) {
+            float: none;
+            margin-left: 0;
+            margin-bottom: 2rem;
         }
 
         /* sprites across breakpoints are a nightmare */
         > a {
             display: block;
-            background-image: url(/img/showcase-logos-sprite.png);
-            @include image-2x("/img/showcase-logos-sprite@2x.png", 510px, 340px);
+            // background-image: url(/img/showcase-logos-sprite.png);
+            // @include image-2x("/img/showcase-logos-sprite@2x.png", 510px, 340px);
             background-repeat: no-repeat;
-            width: 170px;
-            height: 170px;
-            @media screen and (max-width: 670px) {
-                background-image: url(/img/showcase-logos-sprite-medium.png);
-                width: 120px;
-                height: 120px;
-                @include image-2x("/img/showcase-logos-sprite-medium@2x.png", 360px, 240px); /* scaled down proportionally re: width/height breakpoint ratio */
-            }
-            @media screen and (max-width: $breakpoint-sm) {
-                background-image: url(/img/showcase-logos-sprite-small.png);
-                width: 106px;
-                height: 106px;
-                @include image-2x("/img/showcase-logos-sprite-small@2x.png", 318px, 212px); /* scaled down proportionally re: width/height breakpoint ratio */
-            }
+            width: 158px;
+            height: 158px;
             text-indent: 100%;
             white-space: nowrap;
             overflow: hidden;
@@ -773,6 +764,26 @@ $scalemega: 1.02;
             @include border-radius(150px);
             background-color: #fff;
             outline: 0;
+            cursor: help; // janky way to "disable" formerly clickable disc, for now
+        }
+
+        > article {
+            margin: 0;
+            width: 172px;
+            max-width: 100%;
+            text-align: center;
+
+
+            > h4 {
+                margin: 1rem auto 0 auto;
+                text-align: center;
+            }
+
+            > p {
+                margin: 0;
+                text-align: center;
+                font-size: 0.75rem;
+            }
         }
 
     }
@@ -784,11 +795,17 @@ $scalemega: 1.02;
         }
     }
 
+    > li:nth-child(2n+1) {
+        @media screen and (max-width: $breakpoint-med-threshold) {
+            margin-left: 0;
+        }
+    }
+
 }
 
-#workhistory > .selected > a,
-#workhistory > li > a:hover,
-#workhistory > li > a:active {
+.about-history-container > .selected > a,
+.about-history-container > li > a:hover,
+.about-history-container > li > a:active {
     @include animation($animation-property);
 }
 
@@ -810,54 +827,97 @@ $scale: 1.05;
     50% {transform: scale($scale);}
 }
 
-#logo-animoto > a {
+.team-logo > a {
     background-position: 0 0;
+}
+
+.team-logo > a:hover {
+    background-position: 0 -158px;
+}
+
+#logo-buzzfeed > a {
+    background-image: url(/img/team-buzzfeed.png);
+    @include image-2x("/img/team-buzzfeed@2x.png", 158px, 316px);
+}
+
+#logo-buzzfeed.selected > a,
+#logo-buzzfeed > a:hover {
+    border-color: #ea3325;
+}
+
+#logo-animoto > a {
+    background-image: url(/img/team-animoto.png);
+    @include image-2x("/img/team-animoto@2x.png", 158px, 316px);
 }
 
 #logo-animoto.selected > a,
 #logo-animoto > a:hover {
     border-color: #1bcdcf;
-    background-position: 0 -170px; /* 25% = 170px in this case */
-    @media screen and (max-width: $breakpoint-med-threshold) {
-        background-position: 0 100%;
-   }
 }
 
 #logo-eventbrite > a {
-    background-position: -170px 0;
-    @media screen and (max-width: $breakpoint-med-threshold) {
-        background-position: 50% 0;
-   }
+    background-image: url(/img/team-eventbrite.png);
+    @include image-2x("/img/team-eventbrite@2x.png", 158px, 316px);
 }
 
 #logo-eventbrite.selected > a,
 #logo-eventbrite > a:hover {
     border-color: #eea635;
-    background-position: -170px -170px;
-    @media screen and (max-width: $breakpoint-med-threshold) {
-        background-position: 50% 100%;
-   }
 }
 
 #logo-yahoo > a {
-    background-position: -340px 0; /* 50% = 340px in this case */
-    @media screen and (max-width: $breakpoint-med-threshold) {
-        background-position: 100% 0;
-   }
+    background-image: url(/img/team-yahoo.png);
+    @include image-2x("/img/team-yahoo@2x.png", 158px, 316px);
 }
 
 #logo-yahoo.selected > a,
 #logo-yahoo > a:hover {
     border-color: #ab5fa5;
-    background-position: -340px -170px;
-    @media screen and (max-width: $breakpoint-med-threshold) {
-        background-position: 100% 100%;
-   }
+}
+
+#logo-brigade > a {
+    background-image: url(/img/team-brigade.png);
+    @include image-2x("/img/team-brigade@2x.png", 158px, 316px);
+}
+
+#logo-brigade.selected > a,
+#logo-brigade > a:hover {
+    border-color: #7308a7;
+}
+
+#logo-fodors > a {
+    background-image: url(/img/team-fodors.png);
+    @include image-2x("/img/team-fodors@2x.png", 158px, 316px);
+}
+
+#logo-fodors.selected > a,
+#logo-fodors > a:hover {
+    border-color: #f07d31;
+}
+
+#logo-vice > a {
+    background-image: url(/img/team-vice.png);
+    @include image-2x("/img/team-vice@2x.png", 158px, 316px);
+}
+
+#logo-vice.selected > a,
+#logo-vice > a:hover {
+    border-color: #1a1918;
+}
+
+#logo-minibar > a {
+    background-image: url(/img/team-minibar.png);
+    @include image-2x("/img/team-minibar@2x.png", 158px, 316px);
+}
+
+#logo-minibar.selected > a,
+#logo-minibar > a:hover {
+    border-color: #555;
 }
 
 
 /* Work History - Speechless */
-#workhistory {
+.about-history-container {
 
     > li {
 
@@ -872,6 +932,9 @@ $scale: 1.05;
 
         > blockquote {
             display: block;
+            @media screen and (max-width: $breakpoint-sm) {
+                display: none;
+            }
         }
 
     }
@@ -906,14 +969,16 @@ $scale: 1.05;
     @include image-2x("/img/icon-close-down@2x.png", 100%, 100%);
 }
 
-#showcase.expanded #xmarksthespot {
+#showcase.expanded #xmarksthespot,
+.showcase-container.expanded #xmarksthespot {
     display: block;
 }
 
 
 /* Work History - Descriptions */
 
-#showcase.expanded {
+#showcase.expanded,
+.showcase-container.expanded {
 
     #workhistory-description {
         display: block;
@@ -1031,10 +1096,27 @@ $scale: 1.05;
             color: #62788d;
             @media screen and (max-width: $breakpoint-sm) {
                 font-size: 2rem;
+                text-align: center;
             }
         }
     }
+    > hgroup:first-child {
+        > h2 {
+            border-top: 0;
+        }
+    }
+
+    .team-logo-unbounded {
+        > img {
+            @media screen and (max-width: $breakpoint-sm) {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+
 }
+
 
 #abouthistory {
     margin: 0 auto;
@@ -1077,12 +1159,20 @@ $scale: 1.05;
                 max-width: 100%;
             }
             > hgroup {
+
+                @media screen and (max-width: $breakpoint-sm) {
+                    text-align: center;
+                }
+
                 > h3 {
                     margin: 1em 0 0.2em 0;
                     padding-top: 200px;
                     background-color: transparent;
                     background-position: top left;
                     background-repeat: no-repeat;
+                    @media screen and (max-width: $breakpoint-sm) {
+                        background-position: top center;
+                    }
                 }
 
                 > h4 {
@@ -1513,11 +1603,11 @@ input:-moz-placeholder {
 /* Absolutely Speechless */
 .speechbubble {
     position: absolute;
-    top: 150px;
-    left: -17px;
+    top: 135px;
+    left: -32px;
     margin-top: 55px;
     padding: 5px 12px;
-    min-width: 125px;
+    min-width: 145px; // 125px
     text-align: center;
     background-color: #fff;
     border-color: #c9d1d2;

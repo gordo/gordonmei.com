@@ -1,0 +1,1 @@
+This is how the meat is made for my site gordonmei.com. In years past, everything was manually hand-coded. Then I gave in, wised up, and decided it would be more efficient to use the Jekyll static site generator and Sass.

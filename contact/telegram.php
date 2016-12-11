@@ -7,6 +7,9 @@ $mysubject = "Web Form from gordonmei.com";
 $yourname = check_input($_POST['thename'], "Enter your name");
 $email    = check_input($_POST['theemail']);
 $comments = check_input($_POST['themessage'], "Write your message");
+$ip       = $_SERVER['REMOTE_ADDR'];
+$ua       = $_SERVER['HTTP_USER_AGENT'];
+$referrer = $_SERVER['HTTP_REFERER'];
 
 /* If e-mail is not valid, show error message */
 if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email))
@@ -21,6 +24,11 @@ Name: $yourname
 E-mail: $email
 Comments:
 $comments
+
+Sent from:
+IP: $ip
+Browser: $ua
+Referrer: $referrer
 ";
 
 /* Send the message using mail() function */
